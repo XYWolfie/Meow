@@ -5,6 +5,12 @@ rose = 0
 tulip = 0
 files_documents = 0
 gun = 0
+hallway_lights = 0
+camera = 0
+dead_bodies_pic = 0
+enter_security_room = 0
+cat_live = 1
+
 
 print("//")
 print("INSTRUCTIONS:")
@@ -161,7 +167,7 @@ def right_path():
         if answer4d == "yes":
           kill_ending()
         if answer4d == "no":
-          no_kill_ending()
+          kill_ending2()
 
 def kill_ending():
   print("(you get behind her and push her face down in the river)")
@@ -181,7 +187,8 @@ def kill_ending():
         print("(the guards catch up to you and kill you)")
         exit()
 
-def no_kill_ending():
+def kill_ending2():
+  global cat_live
   print("(you decide not to drown her)")
   print("(She drinks some water and you continue walking)")
   print("(you get to a huge cliff)")
@@ -195,6 +202,7 @@ def no_kill_ending():
   print("(Cat looks down the cliff)")
   answer4f = input("(push her?)")
   if answer4f == "yes":
+    cat_live -= 1
     print("(you push her off the cliff)")
     print("(you look over to see her dead body, you don't know how to feel about yourself)")
     print("(you breathe in, you have to keep moving)")
@@ -208,19 +216,31 @@ def no_kill_ending():
       if answer4h == "yes":
         print("(you stand by the road and a car stops for you)")
         print("(a dog is driving, he's wearing a weird coat)")
+      if answer4h == "no":
+        answer4n = input("(go back to the path?)")
+        if answer4n == "no":
+          print("(you stand by the road)")
+          print("(you see a car coming, the driver is rolling down the window)")
+          print("(he shoots you while still driving)")
+          print("(you died)")
+          exit()
         answer4i = input("(get in?)")
         if answer4i == "yes":
           print("(you get in the car with the dog)")
           print("(you ask him where you are, but he doesn't answer)")
           print("(You get a weird feeling about this)")
-          answer4j = input("(ask him to stop the car?)")
-          if answer4j == "yes":
+        if answer4i == "no":
+          print("sorry, i don't need a hike")
+          print("(the driver shoots you and you die)")
+          exit()
+        answer4j = input("(ask him to stop the car?)")
+        if answer4j == "yes":
             print("please stop the car here")
             print("(he looks at you grimly)")
             print("(he pulls out a gun and shoots you)")
             print("(you died)")
             exit()
-          if answer4j == "no":
+        if answer4j == "no":
             print("(he drives you to a big factory")
             print("(he pulls out a gun and tells you to go in the backdoors)")
             answer4k = input("(comply?)")
@@ -262,8 +282,26 @@ def no_kill_ending():
                   print("(you lock the door just in time before they notice and try to barge in)")
                   left_room()
 
+  if answer4f == "no":
+    print("(you don't push her)")
+    print("(you keep walking until you hear the soud of cars)")
+    print("Should we follow the sound?")
+    print("Cat: no, the dogs are dominating the roads here, we can't trust them..")
+    print("ok.. i guess we'll just continue on the path then")
+    print("Cat: yes, just follow me")
+    print("(you walk for quite some time, then you see a big factory)")
+    print("Cat: this is it, we have to walk through the door on the side of the building, my friends should have taken care of the guards)")
+    print("wait what?? what are you talking about??")
+    print("Cat: just follow me")
+    print("(you say nothing, but do as you're told)")
+    print("(you go inside, it's dark and quiet, to your left is three doors)")
+    print("Cat: they're in the security room")
+    security_room()
+
+
+
 def right_room():
-  global rose, stick, tulip, stone, files_documents, gun
+  global rose, stick, tulip, stone, files_documents, gun, cat_live
   print("(the room is filled with files and documents)")
   answer5a = input("(read the files and documents?)")
   if answer5a == "no":
@@ -295,7 +333,7 @@ def right_room():
 
     
 def left_room():
-  global rose, stick, tulip, stone, files_documents, gun
+  global rose, stick, tulip, stone, files_documents, gun, cat_live
   print("(the room is filled with guns)")
   answer6a = input("(take a gun?)")
   if answer6a == "no":
@@ -310,11 +348,100 @@ def left_room():
     print("(the dogs are trying to get through the door)")
     answer6b = input("(shoot them when they get through?)")
     if answer6b == "no":
-      print
+      print("(the dogs get through the door and shoot you)")
+      print("(you died)")
+      exit()
+    if answer6b == "yes":
+      print("(the dogs kick down and you shoot them both successfully)")
+      answer6c = input("(go to the 'right' room or the 'hallway'?)")
+      if answer6c == "right":
+        right_room()
+      if answer6b == "hallway":
+        hallway()
+
 
   
 def hallway():
-  print("(the lights are off..)")
+  global rose, stick, tulip, stone, files_documents, gun, hallway_lights, camera, dead_bodies_pic, cat_live
+  if hallway_lights <= 0:
+    print("(the lights are off..)")
+  else:
+    print("(the lights are on)")
+  print("(you walk down the hallway and end up by three doors)")
+  three_doors()
+ 
+def three_doors():
+  answer7a = input("(which door do you walk through?) ('1', '2', '3'")
+  if answer7a == "3":
+     print("(you walk into the third door)")
+     dead_bodies_room()
+  if answer7a == "1":
+    print("(you walk to the first door)")
+    security_room()
+  if answer7a == "2":
+    lounge_room()
+
+
+def dead_bodies_room():
+  global rose, stick, tulip, stone, files_documents, gun, hallway_lights, camera, dead_bodies_pic, cat_live
+  print("(inside lies hundred of dead bodies)")
+  print("(you feel sick to your stomach)")
+  print("(there's a camera standing in the corner, it's off)")
+  answer7b = input("(take the camera?)")
+  if answer7b == "no":
+     print("(you leave the camera)")
+  if answer7b == "yes":
+    print("(you take the camera)")
+    camera += 1
+    answer7c = input("(take pictures of the bodies?)")
+    if answer7c == "yes":
+      print("(you took pictures of the bodies)")
+      dead_bodies_pic += 1
+    if answer7c == "no":
+      print("you don't take pictures of the bodies)")
+    answer7d = input("(leave the room?)")
+    if answer7d == "no":
+      print("(there's nothing to do here anymore)")
+      print("(you leave the room)")
+    if answer7d == "yes":
+      print("(you leave the room)")
+      three_doors()
+
+def security_room():
+  global rose, stick, tulip, stone, files_documents, gun, hallway_lights, camera, dead_bodies_pic, enter_security_room, cat_live, name
+  enter_security_room += 1
+  if enter_security_room > 1:
+    print()
+  else:
+    if cat_live == 0:
+     print("(you hear someone inside)")
+     print("(you load your gun and get ready to open the door)")
+     print("(you quickly open it and point your gun infront of you)")
+     print("(inside is three cats)")
+     print("you shoot one of them, but is then shot by the second cat)")
+     print("(you died)")
+     exit()
+    else:
+      print("(you walk inside, there are three cats)")
+      print("cat1: Cat!")
+      print("Cat2: finally you're here!")
+      print("cat3: ok ok, we have work to do")
+      print("(none of them even looked at you)")
+      print("(behind them lie two dead dogs)")
+      print("Cat2: we killed the guards in the lounge room too")
+      print("Cat: good, me and " + name + " will check it out")
+
+
+
+
+def lounge_room():
+  global rose, stick, tulip, stone, files_documents, gun, hallway_lights, camera, dead_bodies_pic, enter_security_room, cat_live
+  
+
+
+    
+
+
 
 
 
