@@ -34,7 +34,7 @@ def start_point():
    print("Cat: oh...")
    print("Cat: that's okay..")
    print("(Cat stabs you and you die)")
-   exit()
+   death_message()
   if answer1 == "yes":
    print("Cat: oh thank you, thank you!")
 
@@ -44,7 +44,7 @@ def start_point():
       print("Cat: how are you gonna help me then?")
       print("(you say nothing so Cat stabs you and you die)")
       print("(you should of seen that coming..)")
-      exit()
+      death_message()
   if answer2 == "ok":
     print("Cat: good good")
     print("Cat: let's go :D")
@@ -79,21 +79,10 @@ def forest1():
       print("(you picked up nothing)")
       if answer3 == "no":
        print("(you don't ask and keep walking in silence)")
+       path()
 
-    print("(you walk for a few minutes and the path ends up splitting)")
-    print("Cat: you have to pick what path we're gonna walk")
-    print("don't you know the right one?")
-    print("Cat: I forgot")
-    print("ok..")
-    answer4 = input("(walk the 'right' or 'left' path?)")
-    if answer4 == "right":
-        right_path()
-
-def right_path():
+def path():
   global rose, stick, tulip, stone
-  print("we can try the right path i guess")
-  print("Cat: right is always right!")
-  print("(you walk down the right path)")
   print("(the path leads into a flower meadow")
   print("(on the other side of the meadow is a small castle, there's a young girl standing in front of the doors)")
   print("Cat: that is princess Rose")
@@ -146,7 +135,7 @@ def right_path():
      print("princess, i didn't mean to offend you, i'm sorry")
      print("(you and Cat were killed by the guards)")
      print("(you fucked up lol)")
-     exit()
+     death_message()
   if answer4c == "run":
         print("RUN!") 
         print("Rose: NO! WAIT!!!")
@@ -178,14 +167,14 @@ def kill_ending():
         print("(Cat gets up and push you off)")
         print("(Cat stabs you and you die)")
         print("(not the smartest move)")
-        exit()
+        death_message()
   if answer4e == "yes":
         print("(you hit her on the head with a stone and she falls unconcious)")
         print("(you successfully drown her)")
         print("(you keep walking alone down the path)")
         print("(you end up by a huge cliff and you don't know where to go)")
         print("(the guards catch up to you and kill you)")
-        exit()
+        death_message()
 
 def kill_ending2():
   global cat_live
@@ -232,14 +221,14 @@ def kill_ending2():
         if answer4i == "no":
           print("sorry, i don't need a hike")
           print("(the driver shoots you and you die)")
-          exit()
+          death_message()
         answer4j = input("(ask him to stop the car?)")
         if answer4j == "yes":
             print("please stop the car here")
             print("(he looks at you grimly)")
             print("(he pulls out a gun and shoots you)")
             print("(you died)")
-            exit()
+            death_message()
         if answer4j == "no":
             print("(he drives you to a big factory")
             print("(he pulls out a gun and tells you to go in the backdoors)")
@@ -247,7 +236,7 @@ def kill_ending2():
             if answer4k == "no":
               print("(He shoots you)")
               print("(you died)")
-              exit()
+              death_message()
             if answer4k == "yes":
               print("(you carefully walk in the backdoors, he has his gun pointed at you the entire time)")
               print("(inside you are met by two dogs, both wearing the same coat the driver was wearing)")
@@ -259,7 +248,7 @@ def kill_ending2():
               if answer4l == "no":
                 print("(the dogs shoots you and you die)")
                 print("(you really don't understand this huh?)")
-                exit()
+                death_message()
               if answer4l == "yes":
                 print("(they start walking down the hallway and you follow)")
                 print("(there is a room on both sides of the hallway, the dogs walk past them)")
@@ -271,7 +260,7 @@ def kill_ending2():
                   print("(you walk in to the room)")
                   print("(just as you notice hundreds of bodies laying there you get shot by one of the dogs)")
                   print("you died")
-                  exit()
+                  death_message()
                 if answer4m == "right":
                   print("(you sneak into the room to your right)")
                   print("(you lock the door just in time before they notice and try to barge in)")
@@ -313,7 +302,7 @@ def right_room():
   if gun < 1:
     print("(the dogs kick down the door and shoot you)")
     print("(you died)")
-    exit()
+    death_message()
   else:
     answer5b = input("(Take the files and documents?)")
     if answer5b == "no":
@@ -340,7 +329,7 @@ def left_room():
     print("(you don't take a gun)")
     print("(the dogs kick down the door and shoot you)")
     print("(you died)")
-    exit()
+    death_message()
   if answer6a == "yes":
     print("(you take a gun)")
     gun += 1
@@ -350,7 +339,7 @@ def left_room():
     if answer6b == "no":
       print("(the dogs get through the door and shoot you)")
       print("(you died)")
-      exit()
+      death_message()
     if answer6b == "yes":
       print("(the dogs kick down and you shoot them both successfully)")
       answer6c = input("(go to the 'right' room or the 'hallway'?)")
@@ -373,12 +362,13 @@ def hallway():
 def three_doors():
   answer7a = input("(which door do you walk through?) ('1', '2', '3'")
   if answer7a == "3":
-     print("(you walk into the third door)")
+     print("(you walk through the third door)")
      dead_bodies_room()
   if answer7a == "1":
     print("(you walk to the first door)")
     security_room()
   if answer7a == "2":
+    print("(you walk through the second door)")
     lounge_room()
 
 
@@ -420,7 +410,7 @@ def security_room():
      print("(inside is three cats)")
      print("you shoot one of them, but is then shot by the second cat)")
      print("(you died)")
-     exit()
+     death_message()
     else:
       print("(you walk inside, there are three cats)")
       print("cat1: Cat!")
@@ -430,13 +420,44 @@ def security_room():
       print("(behind them lie two dead dogs)")
       print("Cat2: we killed the guards in the lounge room too")
       print("Cat: good, me and " + name + " will check it out")
+      print("(you walk into the lounge room)")
+      lounge_room()
 
 
 
 
 def lounge_room():
   global rose, stick, tulip, stone, files_documents, gun, hallway_lights, camera, dead_bodies_pic, enter_security_room, cat_live
-  
+  if cat_live == 0:
+    print("(there's dead guards filling the couches)")
+    print("what the hell happened here?")
+    print("(you hear something behind you, you turn around to see two cats each pointing a gun at you)")
+    print("(they shoot you before you even get a chance to say something)")
+    print("(you died)")
+    death_message()
+  else:
+    print("(there's dead bodies filling the couches)")
+    print("Cat: we have to get all their names")
+    print("Cat: get all their keycards")
+    print("(you collect all the cards while Cat watches you)")
+    print("(you go back to the other cats and show them the cards)")
+    print("cat3: great, now we can get out of here")
+    cat_police_station()
+
+def cat_police_station():
+  print("(The cats show the officer all the keycards, without even saying anything the officer seemed to understand)")
+  print("")
+
+
+
+
+
+
+def death_message():
+  import random
+  mylist = ["really?", "that was obvious!", "wow.. you're really dumb"]
+  print (random.choice(mylist))
+  start_point()
 
 
     
